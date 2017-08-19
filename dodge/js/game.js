@@ -1,3 +1,18 @@
+// Initialize Firebase
+  var config = {
+    apiKey: "AIzaSyDJcFqv4Ihm63GT6uojSMqgeMRWkWtPBV4",
+    authDomain: "collaborative-sketch-ccf32.firebaseapp.com",
+    databaseURL: "https://collaborative-sketch-ccf32.firebaseio.com",
+    projectId: "collaborative-sketch-ccf32",
+    storageBucket: "",
+    messagingSenderId: "922433562177"
+  };
+  
+
+
+var pointsData = firebase.database().ref();
+var points = [];
+
 var player;
 var playerImage;
 var isGameOver;
@@ -14,6 +29,18 @@ function preload() {
 function setup() {
     isGameOver = false;
     createCanvas(256, 256);
+    background(255);
+    fill(0);
+    
+    pointsData.on("child_added", function (point) {
+    points.push(point.val());
+  });
+}
+    
+    
+    
+    
+    
     player = createSprite(width/2, height-(playerImage.height/2), 0, 0);
     player.addImage(playerImage);
     enemy = createSprite(width/2, 0, 0, 0);
